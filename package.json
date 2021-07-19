@@ -1,0 +1,33 @@
+{
+  "name": "project-fastify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test:watch": "jest --watchAll",
+    "lint": "eslint '**/*.js' --fix --ignore-pattern node_modules/",
+    "format": "prettier --write '**/*.js'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^3.19.1",
+    "nodemon": "^2.0.12"
+  },
+  "devDependencies": {
+    "eslint": "^7.31.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^27.0.6",
+    "pino-pretty": "^5.1.1",
+    "prettier": "2.3.2",
+    "tap": "^15.0.9"
+  },
+  "eslintIgnore": [
+    "*.test.js",
+    "*.spec.js"
+  ]
+}
