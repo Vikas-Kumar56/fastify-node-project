@@ -12,6 +12,14 @@ containers:
         container: /code/node_modules
     working_directory: /code
 
+  # postgres sql container
+  db:
+    image: postgres:alpine
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: app
+      POSTGRES_DB: db
+
 tasks:
   say-hello:
     description: Say hello to the nice person reading the Batect documentation
@@ -32,7 +40,10 @@ tasks:
     run:
       environment:
         PORT: 8080
+        POSTGRES_URI: postgres://app:password@db/db
       container: build-fastify-env
       command: npm run start
       ports:
         - 5000:8080
+    dependencies:
+      - db
