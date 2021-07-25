@@ -1,6 +1,16 @@
 containers:
   my-container:
     image: alpine:3.11.3
+  build-fastify-env:
+    image: node:14.3.0
+    volumes:
+      - local: .
+        container: /code
+        options: cached
+      - type: cache
+        name: node_modules
+        container: /code/node_modules
+    working_directory: /code
 
 tasks:
   say-hello:
@@ -8,3 +18,21 @@ tasks:
     run:
       container: my-container
       command: echo 'Hello world!'
+
+  # task for installing dep of fastify app
+  install-dep:
+    description: Install dependencies needed to build fastify application
+    run:
+      container: build-fastify-env
+      command: npm install
+
+  # task for running fastify app
+  start-server:
+    description: Run fastify application
+    run:
+      environment:
+        PORT: 8080
+      container: build-fastify-env
+      command: npm run start
+      ports:
+        - 5000:8080
