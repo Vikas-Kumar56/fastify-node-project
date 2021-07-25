@@ -1,0 +1,10 @@
+containers:
+  my-container:
+    image: alpine:3.11.3
+
+tasks:
+  say-hello:
+    description: Say hello to the nice person reading the Batect documentation
+    run:
+      container: my-container
+      command: echo 'Hello world!'
