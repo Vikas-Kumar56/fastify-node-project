@@ -15,12 +15,31 @@ containers:
   # postgres sql container
   db:
     image: postgres:alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - local: ./postgres-data
+        container: /var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: app
+      POSTGRES_DB: db
+
+  db-test:
+    image: postgres:alpine
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: app
       POSTGRES_DB: db
 
 tasks:
+  start-test-db:
+    description: start test database
+    run:
+      container: db-test
+
   say-hello:
     description: Say hello to the nice person reading the Batect documentation
     run:
@@ -47,3 +66,14 @@ tasks:
         - 5000:8080
     dependencies:
       - db
+
+  test-watch:
+    description: test running in watch mode
+    run:
+      container: build-fastify-env
+      environment:
+        PORT: 8080
+        POSTGRES_URI: postgres://app:password@db-test/db
+      command: npm run test:watch
+    dependencies:
+      - db-test

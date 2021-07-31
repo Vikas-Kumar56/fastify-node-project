@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test:watch": "jest --watchAll",
+    "test:watch": "jest --watchAll --detectOpenHandles --runInBand",
     "lint": "eslint '**/*.js' --fix --ignore-pattern node_modules/",
     "format": "prettier --write '**/*.js'"
   },
