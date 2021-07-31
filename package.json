@@ -17,6 +17,7 @@
     "dotenv": "^10.0.0",
     "fastify": "^3.19.1",
     "fastify-plugin": "^3.0.0",
+    "fastify-swagger": "^4.8.3",
     "nodemon": "^2.0.12",
     "pg-promise": "^10.10.2"
   },
