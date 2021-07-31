@@ -3,3 +3,4 @@ coverage
 .idea
 .batect
 postgres-data
+.env
