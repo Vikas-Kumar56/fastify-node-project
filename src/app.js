@@ -10,8 +10,6 @@ const build = (opts = {}) => {
   app.register(db);
   app.register(swaggerPg);
 
-  const val = 10;
-
   // register route
   app.register(testRoute, { prefix: 'api/v1/test' });
 
