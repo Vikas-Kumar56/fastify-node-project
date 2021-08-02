@@ -1,0 +1,27 @@
+Deploy on heroku - manually
+
+ step 1: -  heroku login
+
+ step 2:- Login to heroku container registry 
+     command:-  heroku container:login
+    
+ step 3:- Build docker image and push to heroku container registry
+    command:- heroku container:push -a udemy-fastify-course web
+
+step 4:- Run docker image on heroku
+   comamnd:- heroku container:release -a udemy-fastify-course web
+
+Deploy to heroku with github actions - CD 
+
+  step 1:-  heroku authorizations:create
+    result:         
+        Creating OAuth Authorization... done
+        Client:      <none>
+        ID:          uuid
+        Description: Long-lived user authorization
+        Scope:       global
+        Token:       uuid
+        Updated at:  date
+
+  
+   

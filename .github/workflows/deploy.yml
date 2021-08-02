@@ -21,3 +21,25 @@ jobs:
 
       - name: Perform Linting
         run: ./batect lint
+
+  deploy:
+    needs: build
+    runs-on: 'ubuntu-latest'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login toheroku container registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+
+      - name: Build docker image and push to heroku registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push -a udemy-fastify-course web
+
+      - name: Run docker image on heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release -a udemy-fastify-course web
