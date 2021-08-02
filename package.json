@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
+    "test": "CI=true jest --coverage --runInBand --detectOpenHandles",
     "test:watch": "jest --watchAll --detectOpenHandles --runInBand",
-    "lint": "eslint '**/*.js' --fix --ignore-pattern node_modules/",
+    "lint:fix": "eslint '**/*.js' --fix",
+    "lint": "eslint '**/*.js'",
     "format": "prettier --write '**/*.js'"
   },
   "author": "",
