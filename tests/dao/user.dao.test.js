@@ -18,7 +18,7 @@ describe('User Repository', () => {
   it('should save user in db', async () => {
     const user = {
       firstName: 'peter',
-      last_name: 'smith',
+      lastName: 'smith',
       password: 'password',
       email: 'email',
     };
@@ -46,7 +46,7 @@ describe('User Repository', () => {
   it('should return user id when userId is exist in db', async () => {
     const user = {
       firstName: 'peter',
-      last_name: 'smith',
+      lastName: 'smith',
       password: 'password',
       email: 'email',
     };
@@ -55,7 +55,6 @@ describe('User Repository', () => {
 
     const userId = await saveUser(user);
     const dbuser = await getUserById(userId);
-
     expect(dbuser.first_name).toEqual('peter');
   });
 
