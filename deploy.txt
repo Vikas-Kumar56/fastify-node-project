@@ -22,6 +22,8 @@ Deploy to heroku with github actions - CD
         Scope:       global
         Token:       uuid
         Updated at:  date
-
+    
+    for revoke auth from token:
+       heroku authorizations:revoke ID
   
    
