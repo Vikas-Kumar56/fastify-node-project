@@ -1,3 +1,4 @@
+const moment = require('moment');
 const UserRepository = require('../dao/user.dao');
 
 const userService = (fastify) => {
@@ -10,11 +11,13 @@ const userService = (fastify) => {
       .filter((name) => name !== null)
       .filter((name) => name !== undefined)
       .join(' ');
-
     return {
       id: user.id,
       username,
       email: user.email,
+      createdAt: moment(user.create_at).format('DD/MM/YYYY'),
+      updatedAt: moment(user.create_at).format('DD/MM/YYYY'),
+      version: user.version,
     };
   };
 

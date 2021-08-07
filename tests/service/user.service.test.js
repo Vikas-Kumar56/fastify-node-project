@@ -57,6 +57,9 @@ describe('user service', () => {
       first_name: 'peter',
       password: 'password',
       email: 'email',
+      created_at: '2021-08-07 13:46:33.934071+00',
+      updated_at: '2021-08-07 13:46:33.934071+00',
+      version: 'some uuid',
     });
 
     const user = await getUserById('user_uuid');
@@ -65,6 +68,9 @@ describe('user service', () => {
       id: 'uuid',
       username: 'peter',
       email: 'email',
+      createdAt: '08/08/2021',
+      updatedAt: '08/08/2021',
+      version: 'some uuid',
     });
   });
 });
