@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 const jobRepository = (db) => {
   const save = async (job) => {
     try {
@@ -23,11 +25,12 @@ const jobRepository = (db) => {
 
   const getAll = async (limit, offset) => {
     try {
+      const currentDate = moment().format('YYYY-MM-DD');
       const jobs = await db.query(
         `
-          select * from jobs order by created_at limit $1 offset $2
+          select * from jobs where expired_at >= $1 order by created_at limit $2 offset $3
         `,
-        [limit, offset]
+        [currentDate, limit, offset]
       );
 
       return jobs;

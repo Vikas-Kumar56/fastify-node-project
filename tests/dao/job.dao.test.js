@@ -1,4 +1,5 @@
 const Fastify = require('fastify');
+const moment = require('moment');
 const dbPlugin = require('../../src/plugin/database');
 const JobRepository = require('../../src/dao/job.dao');
 const UserRepository = require('../../src/dao/user.dao');
@@ -65,6 +66,8 @@ describe('Jobs Repository', () => {
   });
 
   it('should return jobs data', async () => {
+    const futureDate = moment().add(4, 'day').format('YYYY-MM-DD');
+
     const { save, getAll } = JobRepository(app.db);
 
     await save({
@@ -73,7 +76,7 @@ describe('Jobs Repository', () => {
       skills: 'skills',
       minBudget: 100,
       maxBudget: 200,
-      expiredAt: '2022/09/21',
+      expiredAt: futureDate,
       userId,
     });
 
@@ -83,7 +86,7 @@ describe('Jobs Repository', () => {
       skills: 'skills',
       minBudget: 100,
       maxBudget: 200,
-      expiredAt: '2022/09/21',
+      expiredAt: futureDate,
       userId,
     });
 
@@ -96,5 +99,36 @@ describe('Jobs Repository', () => {
 
     expect(nextJobs.length).toEqual(1);
     expect(nextJobs[0].title).toEqual('test title - second');
+  });
+
+  it('should filter expired jobs', async () => {
+    const futureDate = moment().add(4, 'day').format('YYYY-MM-DD');
+
+    const { save, getAll } = JobRepository(app.db);
+
+    await save({
+      title: 'test title - 1',
+      description: 'description',
+      skills: 'skills',
+      minBudget: 100,
+      maxBudget: 200,
+      expiredAt: futureDate,
+      userId,
+    });
+
+    await save({
+      title: 'test title - second',
+      description: 'description',
+      skills: 'skills',
+      minBudget: 100,
+      maxBudget: 200,
+      expiredAt: '2000-10-21',
+      userId,
+    });
+
+    const jobs = await getAll(2, 0);
+
+    expect(jobs.length).toEqual(1);
+    expect(jobs[0].title).toEqual('test title - 1');
   });
 });
