@@ -2,7 +2,7 @@ const moment = require('moment');
 const UserRepository = require('../dao/user.dao');
 
 const userService = (fastify) => {
-  const userRepository = UserRepository(fastify);
+  const userRepository = UserRepository(fastify.db);
 
   const getUserById = async (userId) => {
     const user = await userRepository.getUserById(userId);
