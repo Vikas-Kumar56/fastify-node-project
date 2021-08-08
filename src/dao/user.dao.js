@@ -4,7 +4,8 @@ const userRepository = (db) => {
     try {
       const user = await db.one('select * from users where id = $1', [userId]);
       return user;
-    } catch {
+    } catch (error) {
+      console.log('enetr ***********');
       throw Error(`${userId} does not exist`);
     }
   };
