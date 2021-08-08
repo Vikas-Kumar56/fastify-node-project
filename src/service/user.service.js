@@ -15,8 +15,8 @@ const userService = (fastify) => {
       id: user.id,
       username,
       email: user.email,
-      createdAt: moment(user.create_at).format('DD/MM/YYYY'),
-      updatedAt: moment(user.create_at).format('DD/MM/YYYY'),
+      createdAt: moment(user.created_at).format('DD/MM/YYYY'),
+      updatedAt: moment(user.updated_at).format('DD/MM/YYYY'),
       version: user.version,
     };
   };
