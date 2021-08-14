@@ -1,6 +1,7 @@
 const moment = require('moment');
 
 const jobRepository = (db) => {
+  // save job in db
   const save = async (job) => {
     try {
       const { id } = await db.one(
