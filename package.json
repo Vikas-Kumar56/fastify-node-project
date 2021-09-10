@@ -19,6 +19,7 @@
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^10.0.0",
     "fastify": "^3.19.1",
+    "fastify-cors": "^6.0.2",
     "fastify-plugin": "^3.0.0",
     "fastify-swagger": "^4.8.3",
     "moment": "^2.29.1",

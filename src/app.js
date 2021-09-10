@@ -1,4 +1,5 @@
 const fastify = require('fastify');
+const cors = require('fastify-cors');
 const db = require('./plugin/database');
 const testRoute = require('./route/tempTestRoute');
 const swaggerPg = require('./plugin/swagger');
@@ -7,6 +8,9 @@ const jobRoute = require('./route/job');
 
 const build = (opts = {}) => {
   const app = fastify(opts);
+
+  // add cors
+  app.register(cors);
 
   // register plugins
   app.register(db);
