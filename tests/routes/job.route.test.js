@@ -17,17 +17,20 @@ describe('job route', () => {
   beforeAll(async () => {
     app = Fastify();
     app.register(jobRoute, { prefix: 'api/v1/jobs' });
-
+    app.decorate('authenticate', () => true);
     await app.ready();
   });
 
   it('should return 201 when job data is valid', async () => {
     createJob.mockImplementation(() => 'uuid');
     const futureDate = moment().add(4, 'day').format('YYYY-MM-DD');
-
+    // const token = app.jwt.sign({ foo: 'bar' });
     const res = await app.inject({
       method: 'POST',
       url: 'api/v1/jobs',
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
       payload: {
         title: 'title',
         description: 'description',

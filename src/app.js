@@ -5,6 +5,7 @@ const testRoute = require('./route/tempTestRoute');
 const swaggerPg = require('./plugin/swagger');
 const userRoute = require('./route/user');
 const jobRoute = require('./route/job');
+const authenticate = require('./plugin/authenticate');
 
 const build = (opts = {}) => {
   const app = fastify(opts);
@@ -15,6 +16,7 @@ const build = (opts = {}) => {
   // register plugins
   app.register(db);
   app.register(swaggerPg);
+  app.register(authenticate);
 
   // register route
   app.register(testRoute, { prefix: 'api/v1/test' });

@@ -9,6 +9,18 @@ const userRepository = (db) => {
     }
   };
 
+  const getUserByEmail = async (email) => {
+    try {
+      const user = await db.one('select * from users where email = $1', [
+        email,
+      ]);
+
+      return user;
+    } catch {
+      throw Error(`${email} does't exist`);
+    }
+  };
+
   // save user in db
   const saveUser = async (user) => {
     try {
@@ -28,7 +40,7 @@ const userRepository = (db) => {
     }
   };
 
-  return { getUserById, saveUser };
+  return { getUserById, saveUser, getUserByEmail };
 };
 
 module.exports = userRepository;
