@@ -10,6 +10,10 @@ const jobRoute = async (fastify) => {
     '/',
     { schema: { querystring: queryParameter } },
     async (request, reply) => {
+      // authenticate request
+      // append user request.user
+      await fastify.authenticate(request, reply);
+
       const { limit, offset } = request.query;
 
       const jobs = await getJobs(limit, offset);
@@ -35,6 +39,9 @@ const jobRoute = async (fastify) => {
       },
     },
     async (request, reply) => {
+      // authenticate request
+      await fastify.authenticate(request, reply);
+
       const job = request.body;
 
       const jobId = await createJob(job);
